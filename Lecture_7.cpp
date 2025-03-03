@@ -5,9 +5,13 @@
         inplace member initialization
         Default constructors
         Default constructor and dynamically allocated objects
-        Passing arguments to constructors
+    13.8 Passing arguments to constructors
         using default arguments to the constructor
-        Destructors 
-
+        overloading constructors
+    13.9 Destructors
+        only one default constructor and one destructor
+        other overloaded memeber functions
+    13.11 Private member functions
+        using private member functions     
 
  */
