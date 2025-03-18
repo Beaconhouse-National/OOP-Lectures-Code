@@ -5,45 +5,70 @@ class Student{
         int rollno;
         string name;
     public:
-    Student()
-    {
-        rollno = 0;
-        name = " ";
-        cout<<"Default Constructor called"<<endl;
-    }
-    Student(int r, string n)
-    {
-        rollno = r;
-        name = n;
-        cout<<"Parameterized Constructor called"<<endl;
-    }
-    Student(string names){
-        name = names;
-    }
-    ~Student()
-    {
-        cout << "Destructor called" << endl;
-    }
-    void setRollno(int r)
-    {
-        rollno = r;
-    }
-    void display(){
-        cout<<"Roll No: "<<rollno<<endl;
-        cout<<"Name: "<<name<<endl;
-    }
-    void setName(string n){
-        name = n;
-    }
+        Student();
 
-};
+        Student(int r, string n);
+
+        ~Student();
+
+        void setRollno(int r);
+
+        void setName(string n);
+
+        int getRollno();
+
+        string getName();
+}
+;
+Student :: Student (){
+    rollno = 0;
+    name = " ";
+}
+Student :: Student (int r, string n){
+    rollno = r;
+    name = n;
+}
+Student :: ~Student(){
+    cout << "Destructor called" << endl;
+}
+void Student :: setRollno(int r){
+    rollno = r;
+}
+void Student :: setName(string n){
+    name = n;
+}
+int Student :: getRollno(){
+    return rollno;
+}
 int main(){
-    const int size = 5;
-    string name="Ali";
-    Student allstudents[size]={name,Student(5, "Ali"), Student(6, "Ahmed"), Student(7, "Asad"), Student(8, "Ahsan") };
-    for (int i = 0; i < size; i++)
+    int x;
+    string x2;
+    int x3;
+    int x4;
+    int x5;
+    int arryofx[5]={1,2,3,4,5};
+    for (int i = 0; i < 5; i++)
     {
-        allstudents[i].display();
+        arryofx[i] = i;
     }
+    
+    Student student1;
+    Student student2;
+    const int SIZE = 10;
+    Student arrayofstudents[SIZE]{Student(1, "Ali"), Student(2, "Ahmed"), Student(3, "Asad"), Student(4, "Ahsan"), Student(5, "Aqeel")};
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        cout<<"please enter the roll number of student "<<i+1<<endl;
+        cin>>x;
+        cout<<"please enter the name of student "<<i+1<<endl;
+        cin>>x2;
+        arrayofstudents[i].setRollno(x);
+        arrayofstudents[i].setName(x2);
+        cout<<arrayofstudents[i].getRollno();
+    }
+  
+
+
     return 0;
 }
