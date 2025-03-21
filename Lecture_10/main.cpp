@@ -4,7 +4,7 @@
 #include<string>
 using namespace std;
 
-
+//"${workspaceFolder}/Lecture_10/*.cpp"
 
 
 int main(){
