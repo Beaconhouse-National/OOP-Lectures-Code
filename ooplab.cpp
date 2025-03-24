@@ -1,103 +1,79 @@
 #include<iostream>
-#include<string>
 using namespace std;
-class Student;
-class Library{
+class PatientAccount{
     private:
-        string name;
-        string address;
-        int numBooks;
-        int numMembers;
+        double charges;
+        int days;
+        double dailyRate;
     public:
-        Library(){
-            name = "";
-            address = "";
-            numBooks = 0;
-            numMembers = 0;
+        PatientAccount(){
+            charges=0.0;
+            days=0;
+            dailyRate=1000.0;
         }
-        void setName(string n){
-            name = n;
+        void setCharges(double c){
+            charges = c;
         }
-        void setAddress(string a){
-            address = a;
+        void setDays(int d){
+            days = d;
+            charges = days * dailyRate;
         }
-        void setNumBooks(int b){
-            numBooks = b;
+        void setDailyRate(double r){
+            dailyRate = r;
         }
-        void setNumMembers(int m){
-            numMembers = m;
+        double getCharges() const{
+            return charges;
         }
-        string getName() const{
-            return name;
+        int getDays() const{
+            return days;
         }
-        string getAddress() const{
-            return address;
+        double getDailyRate() const{
+            return dailyRate;
         }
-        int getNumBooks() const{
-            return numBooks;
+        void addCharges(double c){
+            charges += c;
         }
-        int getNumMembers() const{
-            return numMembers;
-        }
-        void updatestudentstatus(Student &s);
-};
-class Student{
-    private :
-        static int count;
-        int id;
-        string sname;
-        int status = 1;
-
-    public:
-        Student(){
-            id = 0;
-            sname = "";
-            count++;    
-        }
-        void setId(int i){
-            id = i;
-        }
-        void setName(string n){
-            sname = n;
-        }
-        int getId() const{
-            return id;
-        }
-        int getcount() const{
-            return count;
-        }
-        static void setcount(int c){
-            count = c;
-        }
-        int getStatus() const{
-            return status;
-        }
-        //friend class Library;
-        friend void Library::updatestudentstatus(Student &s);
 
 };
-
-void Library::updatestudentstatus(Student &s){
-    s.count--;
-    s.status = 0;
-    cout << "Student status updated" << endl;
-    cout << "Student count: " << s.count << endl;
-
-}
-int Student::count = 0;
+class Surgery{
+    private:
+    double chargesofSurgery[5]={1000,2000,3000,4000,5000};
+    public:
+    Surgery(){
+        
+    }
+    void performSurgery(PatientAccount &p, int SurgeryType){
+        p.addCharges(chargesofSurgery[SurgeryType]);
+    }
+};
+class Pharmacy{
+    private:
+    double chargesofMedicine[5]={100,200,300,400,500};
+    public:
+    Pharmacy(){
+        
+    }
+    void buyMedicine(PatientAccount &p, int MedicineType){
+        p.addCharges(chargesofMedicine[MedicineType]);
+    }
+};
 
 int main(){
-    Student s1;
-    Student s2;
-    cout<<s1.getcount()<<endl;
-    Library l1;
-   l1.updatestudentstatus(s1);
-   cout<<s1.getcount()<<endl;
-   cout<<s1.getStatus()<<endl;
-   cout<<s2.getStatus()<<endl;
-
-    Student :: setcount(0);
-    cout<<s1.getcount()<<endl;
-
+    PatientAccount p;
+    cout<<"Enter the number of days the patient stayed in the hospital: ";
+    int days;
+    cin>>days;
+    p.setDays(days);
+    Surgery s;
+    cout<<"Enter the type of surgery performed on the patient: 0-4";
+    int SurgeryType;
+    cin>>SurgeryType;
+    s.performSurgery(p,SurgeryType);
+    Pharmacy ph;
+    cout<<"Enter the type of medicine bought by the patient: 0-4";
+    int MedicineType;
+    cin>>MedicineType;
+    ph.buyMedicine(p,MedicineType);
+    cout<<"Total charges: "<<p.getCharges()<<endl;
     return 0;
 }
