@@ -30,12 +30,16 @@ class Student{
         void getCount(){
             cout << "Count: " << count << endl;
         }
-       
-
+        static int setCount(int c);
 };
+int Student :: setCount(int c){
+    count = c;
+    return count;
+}
 int Student::count = 5;
 
 int main(){
+    Student :: setCount(5);
     Student s1;
     s1.getCount();
     Student s2;
