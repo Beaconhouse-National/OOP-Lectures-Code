@@ -1,71 +1,86 @@
 #include<iostream>
-#include<string>
 using namespace std;
-
-class Student{
+class Student {
     private:
         int id;
         string name;
-        int numofsubjects;
+        int numofbooks;
         double *marks;
         
-       
-        void updatemarks(){
-            
-            marks = new double[numofsubjects];
-            for(int i=0;i<numofsubjects;i++){
-                marks[i] = 0;
+        void createmarksarray(int size){
+            numofbooks = size;
+            marks = new double[numofbooks];
+            for (int i = 0; i < numofbooks; i++){
+                marks[i] = 0.0;
             }
-
         }
-    public:
        
-        Student(const Student &s){
-            
-            this->id = s.id;
+    public:
+        Student(Student &s){
+            this->id= s.id;
             this->name = s.name;
-            this->numofsubjects = s.numofsubjects;
-            this->marks = new double[s.numofsubjects];
-            for(int i=0;i<s.numofsubjects;i++){
+            this->numofbooks = s.numofbooks;
+            this->marks = new double[numofbooks];
+            for (int i = 0; i < numofbooks; i++){
                 this->marks[i] = s.marks[i];
             }
-
+        } 
+        Student(string studentname, int numofbooks){ 
+            this->id = 0;
+            this->name = studentname;
+            createmarksarray(numofbooks);
         }
-       
-       Student(string n,int numofs){
-            id = 0;
-            name = n;
-            numofsubjects = numofs;
-            updatemarks();
-            
-        }
-        void setId(int i){
+        
+        void setId(int i) {
             id = i;
         }
-        void setName(string n){
+        void setName(string n) {
             name = n;
         }
-       
-        int getId() const{
+        
+        int getId() const {
             return id;
         }
-        string getName() const{
+        string getName() const {
             return name;
         }
-        int getNumofsubjects() const{
-            return numofsubjects;
+        double getmarks(int index)const{
+            return marks[index];
+        }
+        void setmarks(int index, double value){
+            if (index >= 0 && index < numofbooks) {
+                this->marks[index] = value;
+            } 
+
         }
         
 };
 int main(){
-    Student s1("Ali", 10);
-    Student s2("Ahmed", 5);
-    cout << s1.getName() << endl;
-    cout << s2.getName() << endl;
-    cout << s1.getNumofsubjects() << endl;
-    cout << s2.getNumofsubjects() << endl;
-    s1 = s2;
-   
-
+    Student a1("Ali", 5);
+    a1.setmarks(0, 90.0);
+    a1.setmarks(1, 85.0);
+    a1.setmarks(2, 95.0);
+    a1.setmarks(3, 80.0);
+    a1.setmarks(4, 88.0);
+    cout << "Student ID: " << a1.getId() << endl;
+    cout << "Student Name: " << a1.getName() << endl;
+    cout << "Marks in subject 1: " << a1.getmarks(0) << endl;
+    cout << "Marks in subject 2: " << a1.getmarks(1) << endl;  
+    cout << "Marks in subject 3: " << a1.getmarks(2) << endl;
+    cout << "Marks in subject 4: " << a1.getmarks(3) << endl;
+    cout << "Marks in subject 5: " << a1.getmarks(4) << endl;
+    cout << "Marks in subject 6: " << a1.getmarks(5) << endl; // This will show an error message
+    Student a2= a1;  // Copy constructor
+    cout << "Student ID: " << a2.getId() << endl;
+    cout << "Student Name: " << a2.getName() << endl;
+    cout << "Marks in subject 1: " << a2.getmarks(0) << endl;
+    cout << "Marks in subject 2: " << a2.getmarks(1) << endl;
+    cout << "Marks in subject 3: " << a2.getmarks(2) << endl;
+    cout << "Marks in subject 4: " << a2.getmarks(3) << endl;
+    cout << "Marks in subject 5: " << a2.getmarks(4) << endl;
+    cout << "Marks in subject 6: " << a2.getmarks(5) << endl; // This will show an error message
+    a2.setmarks(0, 100.0); // Change marks in a2
+    cout << "Marks in subject 1 after changing a2: " << a2.getmarks(0) << endl; // This will show the original value in a1
+    cout<< "Marks in subject 1 in a1: " << a1.getmarks(0) << endl; // This will show the original value in a1
     return 0;
 }
