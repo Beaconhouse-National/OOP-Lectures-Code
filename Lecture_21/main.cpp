@@ -42,10 +42,11 @@ public:
         temp.marks = marks - s.marks;
         return temp;
     }
-    int  operator+(int a){
+    void operator+(int a){
         
         age += a;
-        return ;
+        
+        
     }
     bool operator<(const Student& s){
         return age < s.age;    
@@ -67,7 +68,8 @@ int main(){
     student2.setmarks(100);
     student1.setmarks(90);
     student3 = student1 - student2;
-    student1 + 5;
+    student1 + 5; // This will call the operator+ function
+    student1.operator+(5);// This will also call the operator+ function
     cout << "Student 3's age after subtracting Student 2's age from Student 1's age: " << student3.getage() << endl; // Output: -5
     if(student1<student2)
     return 0;
