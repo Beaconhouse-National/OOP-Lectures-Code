@@ -46,7 +46,7 @@ class Cars: protected automobile{
             noofdoors = 0;
             cout<<"Cars constructor called"<<endl;
         }
-        Cars(string c, int y, float m, double p, int n):automobile(c,y,m,p){
+        Cars(string c, int y, float m, double p, int n):automobile(c,y,m,p),noofdoors(n){
             noofdoors = n;
             cout<<"Cars parameterized constructor called"<<endl;
         }
